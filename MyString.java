@@ -45,29 +45,26 @@ public class MyString {
         if (str1.length() > str2.length() || str2.length() == 0) {
             return false;
         }
-        if (str1.length() == str2.length()) {
-            if (str1 == str2) {
-                return true;
-            }
-        }
-        str1 = str1.toLowerCase();
-        str2 = str2.toLowerCase();
+        // Creating copies of str1, str2 so I won't change the origin strings.
+        String newstr1 = str1.toLowerCase();
+        String newStr2 = str2.toLowerCase();
 
-        boolean doesContain;
-        for (int i = 0; i < (str2.length() - str1.length()); i++) {
-            doesContain = true;
-            for (int j = 0; j < str1.length(); j++) 
+        boolean isSub;
+        for (int i = 0; i < newstr1.length(); i++) {
+            isSub = false;
+            for (int j = 0; j < newStr2.length(); j++) 
             {
-                if (str2.charAt(i + j) != str1.charAt(j)) {
-                    doesContain = false;
+                if (newstr1.charAt(i) == newStr2.charAt(j)) {
+                    isSub = true;
+                    newStr2 = newStr2.substring(0, j) + newStr2.substring(j + 1);
                     break;
                 }
             }
-            if (doesContain) {
-                return true;
+            if (!isSub) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     /** Returns a string which is the same as the given string, with a space
